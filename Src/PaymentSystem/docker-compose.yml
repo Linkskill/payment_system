@@ -1,0 +1,28 @@
+services:
+  gateway.api:
+    image: ${DOCKER_REGISTRY-}gatewayapi
+    build:
+      context: Gateway/Gateway.API
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+    networks:
+      - proxybackend
+
+  customer.api:
+    image: ${DOCKER_REGISTRY-}customerapi
+    build:
+      context: Services/Customer.API
+      dockerfile: Dockerfile
+    ports:
+      - "5100:8080"
+      - "5101:8081"
+    networks:
+      - proxybackend
+
+networks:
+  proxybackend:
+    name: proxybackend
+    driver: bridge
+

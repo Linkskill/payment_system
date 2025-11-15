@@ -1,0 +1,86 @@
+# .gitignore (repo root) - .NET 8 / Visual Studio / Docker
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+**/bin/
+**/obj/
+**/out/
+publish/
+*.dll
+*.exe
+*.app
+*.appref-ms
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Rider / IntelliJ
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+
+# NuGet
+*.nupkg
+*.snupkg
+.packages/
+.nuget/
+
+# ASP.NET Core / app settings / secrets
+appsettings.*.Local.json
+appsettings.*.Secrets.json
+secrets.json
+secrets.*.json
+
+# Certificates / keys
+*.pfx
+*.key
+*.pem
+*.cer
+*.crt
+
+# Docker
+.env
+docker-compose.override.yml
+**/docker-compose.override.yml
+**/docker-compose.*.yml
+**/docker-compose.*.yaml
+
+# Logs, telemetry, coverage
+*.log
+logs/
+TestResults/
+coverage/
+coverage*.xml
+
+# Publish / deployment artifacts
+*.publishsettings
+*.deploy.cmd
+*.zip
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git meta
+*.orig
