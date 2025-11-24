@@ -29,7 +29,6 @@
     <Folder Include="Application\Consumers\" />
     <Folder Include="Application\Publishers\" />
     <Folder Include="Infrastructure\Data\" />
-    <Folder Include="EventHandlers\Query\" />
   </ItemGroup>
 
 </Project>

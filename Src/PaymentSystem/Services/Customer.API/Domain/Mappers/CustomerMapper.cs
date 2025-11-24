@@ -19,10 +19,11 @@ namespace Customer.API.Domain.Mappers
             };
         }
 
-        public static CustomerResponseDto ToCustomerResponseFromCommand(this Client client)
+        public static CustomerResponseDto ToCustomerResponse(this Client client)
         {
             return new CustomerResponseDto
             {
+                Id = client.Id,
                 Name = client.Name,
                 Email = client.Email,
                 CPF = client.CPF,

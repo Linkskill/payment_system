@@ -1,5 +1,6 @@
 using Customer.API.Domain.DTO.Request;
 using Customer.API.EventHandlers.Command.Interfaces;
+using Customer.API.EventHandlers.Query.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Customer.API.Controllers
@@ -10,17 +11,37 @@ namespace Customer.API.Controllers
     {
         private readonly ILogger<CustomersController> _logger;
         private readonly ICustomerCommandHandler _customerCommandHandler;
+        private readonly ICustomerQueryHandler _customerQueryHandler;
 
-        public CustomersController(ILogger<CustomersController> logger, ICustomerCommandHandler customerCommandHandler)
+        public CustomersController(ILogger<CustomersController> logger,
+            ICustomerCommandHandler customerCommandHandler, ICustomerQueryHandler customerQueryHandler)
         {
             _logger = logger;
             _customerCommandHandler = customerCommandHandler;
+            _customerQueryHandler = customerQueryHandler;
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var customerResponse = await _customerQueryHandler.GetByIdAsync(id);
+
+            if (customerResponse == null)
+                return NotFound();
+
+            return Ok(customerResponse);
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = "Lista de usuarios";
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _customerQueryHandler.GetAllAsync();
 
             return Ok(result);
         }
@@ -33,7 +54,7 @@ namespace Customer.API.Controllers
 
             var customerResponse = await _customerCommandHandler.AddClient(customerRequest);
 
-            return Ok(customerResponse);
+            return CreatedAtAction(nameof(GetById), new { id = customerResponse.Id }, customerResponse);
         }
     }
 }

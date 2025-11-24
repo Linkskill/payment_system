@@ -1,5 +1,7 @@
 using Customer.API.EventHandlers.Command;
 using Customer.API.EventHandlers.Command.Interfaces;
+using Customer.API.EventHandlers.Query;
+using Customer.API.EventHandlers.Query.Interfaces;
 using Customer.API.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ICustomerCommandHandler, CustomerCommandHandler>();
+builder.Services.AddScoped<ICustomerQueryHandler, CustomerQueryHandler>();
 
 var app = builder.Build();
 

@@ -8,6 +8,7 @@ namespace Customer.API.EventHandlers.Command
 {
     public class CustomerCommandHandler : ICustomerCommandHandler
     {
+        // TODO: Create a new admin db context
         private readonly AppDbContext _dbContext;
 
         public CustomerCommandHandler(AppDbContext dbContext)
@@ -22,7 +23,7 @@ namespace Customer.API.EventHandlers.Command
             await _dbContext.Clients.AddAsync(client);
             await _dbContext.SaveChangesAsync();
             
-            return client.ToCustomerResponseFromCommand();
+            return client.ToCustomerResponse();
         }
 
     }
