@@ -1,5 +1,5 @@
 using Customer.API.Domain.DTO.Request;
-using Customer.API.Domain.DTO.Response;
+using Customer.API.EventHandlers.Command.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Customer.API.Controllers
@@ -9,10 +9,12 @@ namespace Customer.API.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly ILogger<CustomersController> _logger;
+        private readonly ICustomerCommandHandler _customerCommandHandler;
 
-        public CustomersController(ILogger<CustomersController> logger)
+        public CustomersController(ILogger<CustomersController> logger, ICustomerCommandHandler customerCommandHandler)
         {
             _logger = logger;
+            _customerCommandHandler = customerCommandHandler;
         }
 
         [HttpGet]
@@ -24,9 +26,12 @@ namespace Customer.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] CustomerRequestDto customerRequest)
+        public async Task<IActionResult> Create([FromBody] CustomerRequestDto customerRequest)
         {
-            var customerResponse = new CustomerResponseDto();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var customerResponse = await _customerCommandHandler.AddClient(customerRequest);
 
             return Ok(customerResponse);
         }

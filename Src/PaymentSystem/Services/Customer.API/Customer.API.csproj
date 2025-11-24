@@ -28,9 +28,7 @@
   <ItemGroup>
     <Folder Include="Application\Consumers\" />
     <Folder Include="Application\Publishers\" />
-    <Folder Include="Domain\Mappers\" />
     <Folder Include="Infrastructure\Data\" />
-    <Folder Include="EventHandlers\Command\" />
     <Folder Include="EventHandlers\Query\" />
   </ItemGroup>
 

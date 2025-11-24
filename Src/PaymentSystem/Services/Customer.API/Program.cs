@@ -1,3 +1,5 @@
+using Customer.API.EventHandlers.Command;
+using Customer.API.EventHandlers.Command.Interfaces;
 using Customer.API.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +14,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<ICustomerCommandHandler, CustomerCommandHandler>();
 
 var app = builder.Build();
 
