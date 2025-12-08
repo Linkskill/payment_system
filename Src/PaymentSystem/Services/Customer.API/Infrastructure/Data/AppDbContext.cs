@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Customer.API.Infrastructure.Models;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Customer.API.Infrastructure.Data
 {

@@ -26,7 +26,7 @@ namespace Customer.API.EventHandlers.Query
 
         public async Task<List<CustomerResponseDto>> GetAllAsync()
         {
-            var clientQueryable = _dbContext.Clients.Include(c => c.Id).AsQueryable();
+            var clientQueryable = _dbContext.Clients.AsQueryable();
 
             var customerResponseList = await clientQueryable.Select(c => c.ToCustomerResponse()).ToListAsync();
 
